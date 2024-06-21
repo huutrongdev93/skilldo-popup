@@ -1,11 +1,11 @@
 <div class="salebanner-component-6 widgetBackgroundImage">
     <div class="group-content">
-        <div class="widgetTitle"><?php echo $config['style6_title1'];?></div>
-        <div class="widgetBigTitle"><?php echo $config['style6_title2'];?></div>
+        <div class="widgetTitle">{{$config['style6_title1']}}</div>
+        <div class="widgetBigTitle">{{$config['style6_title2']}}</div>
         <div class="position-percent">
-            <div class="widgetDescription"><?php echo $config['style6_content'];?></div>
+            <div class="widgetDescription">{{$config['style6_content']}}</div>
         </div>
-        <a class="btn widgetButton" href="<?php echo $config['style6_btn_url'];?>" target="_top"><?php echo $config['style6_btn_txt'];?></a>
+        <a class="btn widgetButton" href="{{$config['style6_btn_url']}}" target="_top">{{$config['style6_btn_txt']}}</a>
     </div>
 </div>
 <style>
@@ -42,7 +42,7 @@
         font-weight: 600;
         top: 75px;
         width: 170px;
-        color: <?php echo $config['style6_title1_color'];?>!important;
+        color: {{$config['style6_title1_color']}}!important;
     }
     .salebanner-component-6 .widgetBigTitle {
         position: absolute;
@@ -52,7 +52,7 @@
         left: 13px;
         height: 35px;
         font-size: 22px;
-        color: <?php echo $config['style6_title2_color'];?>!important;
+        color: {{$config['style6_title2_color']}}!important;
     }
     .position-percent {
         left: 79px;
@@ -68,7 +68,7 @@
         top: 156px;
         left: 112px;
         font-size: 40px;
-        color: <?php echo $config['style6_content_color'];?>!important;
+        color: {{$config['style6_content_color']}}!important;
 
     }
     .salebanner-component-6  .widgetButton {
@@ -80,8 +80,8 @@
         bottom: -16px;
         position: absolute;
         outline: none;
-        color: <?php echo $config['style6_btn_color'];?>!important;
-        background-color: <?php echo $config['style6_btn_bg'];?>!important;
+        color: {{$config['style6_btn_color']}}!important;
+        background-color: {{$config['style6_btn_bg']}}!important;
     }
     @media(max-width:600px) {
         .salebanner-component-6 {

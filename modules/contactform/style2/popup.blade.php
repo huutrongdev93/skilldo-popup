@@ -1,23 +1,23 @@
-<div class="contactform-style-2 widgetBackgroundImage">
+<div class="js_popup_contactform contactform-style-2 widgetBackgroundImage">
     <form class="js_popup_contactform__form main-salebanner formStep1">
         <input type="hidden" name="style" value="style2">
         <div class="widgetTitle">
-            <?php echo $config['style2_title1'];?>
+            {{$config['style2_title1']}}
         </div>
         <div class="widgetDescription">
-            <?php echo $config['style2_content'];?>
+            {{$config['style2_content']}}
         </div>
         <div class="form-email">
             <?php if(in_array('email', $contactform_input)) {?>
-                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" <?php echo (in_array('email', $contactform_required)) ? 'required' : '';?>>
+                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" {{(in_array('email', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('phone', $contactform_input)) {?>
-                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" <?php echo (in_array('phone', $contactform_required)) ? 'required' : '';?>>
+                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" {{(in_array('phone', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('note', $contactform_input)) {?>
-                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" <?php echo (in_array('note', $contactform_required)) ? 'required' : '';?>></textarea>
+                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" {{(in_array('note', $contactform_required)) ? 'required' : ''}}></textarea>
             <?php } ?>
-            <button type="submit" class="button-send font-button-send widgetButton widgetBuble"><i class="fas fa-gift" id="bubble-icon" style="color: rgb(255, 255, 255);"></i></button>
+            <button type="submit" class="button-send font-button-send widgetButton widgetBuble">{!! !empty($config['style2_btn_txt']) ? $config['style2_btn_txt'] : '<i class="fas fa-gift" id="bubble-icon" style="color: rgb(255, 255, 255);"></i>' !!}</button>
         </div>
     </form>
     <div class="js_popup_contactform__success formStep2 hiddenAll">
@@ -35,7 +35,7 @@
     .contactform-style-2 {
         width: 100%;
         min-height: 350px;
-        background: url('<?php echo Template::imgLink($config['style2_popup_bg']);?>') center right no-repeat;
+        background: url('{!!Template::imgLink($config['style2_popup_bg'])!!}') center right no-repeat;
         border-radius: 10px;
         display: inline-flex;
         text-align: center;
@@ -51,7 +51,7 @@
     .contactform-style-2 .widgetTitle {
         margin-bottom: 8px;
         line-height: 24px;
-        color: <?php echo $config['style2_title1_color'];?>;
+        color: {{$config['style2_title1_color']}};
         font-weight: 700;
         text-align: center;
         overflow: hidden;
@@ -68,7 +68,7 @@
         margin: 20px 0;
         margin-top: 0;
         width: 100%;
-        color:<?php echo $config['style2_content_color'];?>;
+        color:{{$config['style2_content_color']}};
     }
     .contactform-style-2 .form-email {
         display: flex;
@@ -95,8 +95,8 @@
         padding: 0 15px;
         border: none;
         cursor: pointer;
-        color: <?php echo $config['style2_btn_color'];?>;
-        background-color: <?php echo $config['style2_btn_bg'];?>;
+        color: {{$config['style2_btn_color']}};
+        background-color: {{$config['style2_btn_bg']}};
     }
     .contactform-style-2 .js_popup_contactform__success {
         width: 60%;

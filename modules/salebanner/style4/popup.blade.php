@@ -5,21 +5,21 @@
         <div class="salebanner-header-cus">
             <div class="salebanner-group-title">
                 <div class="salebanner-content-mini widgetTitle">
-                    <?php echo $config['style4_title1'];?>
+                    {{$config['style4_title1']}}
                 </div>
                 <div class="salebanner-name widgetBigTitle">
-                    <?php echo $config['style4_title2'];?>
+                    {{$config['style4_title2']}}
                 </div>
                 <div class="salebanner-desc widgetDescription">
-                    <?php echo $config['style4_content'];?>
+                    {{$config['style4_content']}}
                 </div>
             </div>
         </div>
         <div class="salebanner-group-descreption">
-            <div class="salebanner-price widgetPrice"><?php echo $config['style4_price'];?></div>
+            <div class="salebanner-price widgetPrice">{{$config['style4_price']}}</div>
             <div class="salebanner-box-chat">
                 <a class="btn content_link widgetButton" href="" target="_top">
-                    <?php echo $config['style4_btn_txt'];?>
+                    {{$config['style4_btn_txt']}}
                 </a>
             </div>
         </div>
@@ -40,7 +40,7 @@
         position: relative;
     }
     .salebanner-component-4 .salebanner-area-image {
-        background-image: url('<?php echo Template::imgLink($config['style4_popup_bg']);?>');
+        background-image: url('{{Template::imgLink($config['style4_popup_bg'])}}');
         height: 170px;
         border-radius: 10px 10px 0 0;
         background-size: cover;
@@ -54,13 +54,13 @@
         justify-content: center;
         padding-top: 25px;
         text-align: center;
-        color: <?php echo $config['style4_title1_color'];?>!important;
+        color: {{$config['style4_title1_color']}}!important;
         width: auto;
         font-size: 16px;
     }
     .salebanner-component-4 .salebanner-name {
         text-align: center;
-        color: <?php echo $config['style4_title2_color'];?>!important;
+        color: {{$config['style4_title2_color']}}!important;
         margin: 15px 0;
         font-weight: 700;
         font-size: 34px;
@@ -70,7 +70,7 @@
         padding-bottom: 20px;
         margin: 0 auto;
         text-align: center;
-        color: <?php echo $config['style4_content_color'];?>!important;
+        color: {{$config['style4_content_color']}}!important;
         width: 341px;
 
     }
@@ -108,7 +108,7 @@
         text-align: left;
         cursor: pointer;
         text-decoration: none;
-        color: <?php echo $config['style4_btn_color'];?>!important;
+        color: {{$config['style4_btn_color']}}!important;
         font-weight: 400;
         width: 100%;
         height: 100%;
@@ -116,7 +116,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 5px;
-        background-color: <?php echo $config['style4_btn_bg'];?>!important;
+        background-color: {{$config['style4_btn_bg']}}!important;
     }
     @media(max-width:600px) {
         .salebanner-component-4 {

@@ -1,66 +1,73 @@
 <?php
-function admin_page_popup_default() {
-    $form = new Form();
-    $form->add('popup_alert_title', 'textBuilding', ['label' => 'Tiêu đề', 'start' => 10], popup_default::config('title'));
-    $form->add('popup_alert_title_color', 'color', ['label' => 'Màu tiêu đề', 'start' => 2], popup_default::config('title_color'));
-    $form->add('popup_alert_background_image', 'image', ['label' => 'Hình nền popup', 'start' => 4], popup_default::config('background_image'));
-    $form->add('popup_alert_background_color', 'color', ['label' => 'Màu nền popup', 'start' => 2], popup_default::config('background_color'));
-    $form->add('popup_alert_padding_top_bottom', 'number', [
-        'label' => 'Khoảng trống (Trên và dưới)', 'start' => 3,
-        'note' => 'Khoảng trống nằm giữa nội dung và viền'
-    ], popup_default::config('padding_top_bottom'));
-    $form->add('popup_alert_padding_left_right', 'number', [
-        'label' => 'Khoảng trống (Trái và phải)', 'start' => 3,
-        'note' => 'Khoảng trống nằm giữa nội dung và viền'
-    ], popup_default::config('padding_left_right'));
-    $form->add('popup_alert_description', 'wysiwyg', [
+function admin_page_popup_default(): void
+{
+    $form = form();
+    $form->textBuilding('popup_alert_title', ['label' => 'Tiêu đề', 'start' => 10], Popup_default::config('title'));
+    $form->boxBuilding('popup_alert_style', [
+        'label' => 'Style Popup',
+        'start' => 2,
+        'customInput' => [
+            'hover' => false
+        ],
+    ], Popup_default::config('title_color'));
+    $form->wysiwyg('popup_alert_description', [
         'label' => 'Nội dung popup', 'start' => 12,
     ], popup_default::config('description'));
-    include FCPATH.Path::plugin( POPUP_NAME ).'/modules/default/views/popup-alert-config.php';
+
+    Plugin::view(POPUP_NAME, 'modules/default/views/popup-alert-config', ['form' =>$form]);
 }
 
-class popup_default {
-
-    public static function instance() {
-        if ( is_null( self::$_instance ) ) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
+class Popup_default {
 
     public static function config($key = '') {
         $default = [
-            'title' => '',
-            'description' => '',
-            'background_color' => '',
-            'background_image' => '',
-            'title_color' => '',
+            'title'             => '',
+            'description'       => '',
+            'background_color'  => '',
+            'background_image'  => '',
+            'title_color'       => '',
+            'style' => [],
         ];
-        $config = option::get('popup_default', array_merge([], $default));
-        if(empty($config)) $config = $default;
-        if(!empty($key)) {
-            if(isset($config[$key])) return $config[$key]; return '';
+
+        $config = Option::get('popup_default', array_merge([], $default));
+
+        if(empty($config) || !is_array($config)) {
+            $config = $default;
         }
+        else {
+            foreach ($default as $keyDefault => $valueDefault) {
+                if(!isset($config[$keyDefault])) {
+                    $config[$keyDefault] = $valueDefault;
+                }
+            }
+        }
+
+        if(!empty($key)) {
+            return Arr::get($config, $key);
+        }
+
         return $config;
     }
 
-    public static function admin_config_save($result) {
-
+    public static function admin_config_save(\SkillDo\Http\Request $request): void
+    {
         $config = [
-            'title'             => trim(Request::post('popup_alert_title')),
-            'description'       => Request::post('popup_alert_description', ['clear' => false]),
-            'background_color'  => trim(Request::post('popup_alert_background_color')),
-            'background_image'  => FileHandler::handlingUrl(trim(Request::post('popup_alert_background_image'))),
-            'title_color'       => trim(Request::post('popup_alert_title_color')),
+            'title'             => $request->input('popup_alert_title'),
+            'description'       => $request->input('popup_alert_description', ['clear' => false]),
+            'style'             => $request->input('popup_alert_style'),
         ];
 
-        option::update('popup_default', $config);
-
-        return ['status' => 'success', 'message' => 'Lưu dữ liệu thành công.'];
+        Option::update('popup_default', $config);
     }
 
-    public static function render() {
+    public static function render(): void
+    {
         $config = static::config();
-        include 'views/popup.php';
+
+        $config['style'] = Template::cssBox($config['style']);
+
+        Plugin::view(POPUP_NAME, 'modules/default/views/popup', [
+            'config' => $config
+        ]);
     }
 }

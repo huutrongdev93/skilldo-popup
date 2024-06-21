@@ -1,10 +1,10 @@
 <div class="salebanner-component-5 widgetBackgroundImage">
     <div class="main-salebanner">
         <div class="group">
-            <div class="widgetTitle"><?php echo $config['style5_title1'];?></div>
-            <div class="widgetBigTitle"><?php echo $config['style5_title2'];?></div>
-            <div class="widgetDescription"><?php echo $config['style5_content'];?></div>
-            <a class="btn widgetButton" href="<?php echo $config['style5_btn_url'];?>" target="_top"><?php echo $config['style5_btn_txt'];?></a>
+            <div class="widgetTitle">{{$config['style5_title1']}}</div>
+            <div class="widgetBigTitle">{{$config['style5_title2']}}</div>
+            <div class="widgetDescription">{{$config['style5_content']}}</div>
+            <a class="btn widgetButton" href="{{$config['style5_btn_url']}}" target="_top">{{$config['style5_btn_txt']}}</a>
         </div>
     </div>
 </div>
@@ -19,7 +19,7 @@
         border-radius: 10px;
         background-color: #fff;
         position: relative;
-        background-image: url('<?php echo Template::imgLink($config['style5_popup_bg']);?>');
+        background-image: url('{{Template::imgLink($config['style5_popup_bg'])}}');
         display: inline-flex;
         text-align: center;
         align-items: center;
@@ -48,7 +48,7 @@
         letter-spacing: 2px;
         font-family: "Dancing Script";
         font-size: 33px;
-        color: <?php echo $config['style5_title1_color'];?>!important;
+        color: {{$config['style5_title1_color']}}!important;
     }
     .salebanner-component-5 .widgetBigTitle {
         white-space: nowrap;
@@ -63,7 +63,7 @@
         letter-spacing: 9px;
         font-family: Anton;
         font-size: 90px; font-weight: bold;
-        color: <?php echo $config['style5_title2_color'];?>!important;
+        color: {{$config['style5_title2_color']}}!important;
     }
     .salebanner-component-5 .widgetDescription {
         overflow: hidden;
@@ -77,7 +77,7 @@
         height: 60px;
         font-family: Mali;
         font-size: 18px;
-        color: <?php echo $config['style5_content_color'];?>!important;
+        color: {{$config['style5_content_color']}}!important;
 
     }
     .salebanner-component-5  .widgetButton {
@@ -96,7 +96,7 @@
         font-size: 18px;
         font-weight: 400;
         text-decoration: none;
-        color: <?php echo $config['style5_btn_color'];?>!important;
-        background-color: <?php echo $config['style5_btn_bg'];?>!important;
+        color: {{$config['style5_btn_color']}}!important;
+        background-color: {{$config['style5_btn_bg']}}!important;
     }
 </style>

@@ -8,7 +8,9 @@ foreach (glob(Path::plugin(POPUP_NAME).'/modules/contactform/*', GLOB_ONLYDIR) a
 }
 
 function admin_page_popup_contactform() {
-    include 'html-contactform.php';
+    $styles = popup_contactform::style();
+    $active = Option::get('popup_contactform_active');
+    Plugin::view(POPUP_NAME, 'modules/contactform/html-contactform', ['styles' => $styles, 'active' => $active]);
 }
 
 class popup_contactform {
@@ -39,32 +41,27 @@ class popup_contactform {
 
 if (!function_exists('popup_ajax_contactform_submit')) {
 
-    function popup_ajax_contactform_submit($ci, $model) {
+    function popup_ajax_contactform_submit(\SkillDo\Http\Request $request, $model) {
 
-        $result['message'] = 'Cập nhật dữ liệu thất bại.';
+        if ($request->isMethod('post')) {
 
-        $result['status'] = 'error';
+            $phone  = $request->input('phone');
 
-        if (Request::Post()) {
+            $email  = $request->input('email');
 
-            $phone  = Request::Post('phone');
+            $note  = $request->input('note');
 
-            $email  = Request::Post('email');
-
-            $note  = Request::Post('note');
-
-            $style  = Request::Post('style');
+            $style  = $request->input('style');
 
             if(empty($phone) && empty($email)) {
-                $result['message'] = _('Không có thông tin đăng ký');
-                echo json_encode($result);
-                return false;
+
+                response()->error(__('Không có thông tin đăng ký'));
             }
 
             if(empty($style) || !have_posts(popup_contactform::style('popup_contactform_'.$style))) {
-                $result['message'] = _('Style contact form chưa được đăng ký');
-                echo json_encode($result);
-                return false;
+
+                response()->error(__('Style contact form chưa được đăng ký'));
+
             }
 
             $title   = '';
@@ -97,15 +94,12 @@ if (!function_exists('popup_ajax_contactform_submit')) {
 
                 option::update('popup_contactform_new', $count+1);
 
-                $result['message'] = 'Cập nhật dữ liệu thất bại.';
+                response()->success('Đăng ký thành công');
 
-                $result['status'] = 'success';
             }
         }
 
-        echo json_encode($result);
-
-        return true;
+        response()->error(trans('ajax.save.fail'));
     }
 
     Ajax::client('popup_ajax_contactform_submit');

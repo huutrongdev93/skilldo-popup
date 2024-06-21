@@ -1,29 +1,35 @@
-<div class="contactform-style-5 widgetBackgroundImage">
+<div class="js_popup_contactform contactform-style-5 widgetBackgroundImage">
     <div class="banner-header banner-image widgetBackgroundImage" style="background-color: transparent; background-image: url(&quot;https://themes.trazk.com/004/contactform/0218/images/popup/gift-box.png&quot;);"></div>
     <form class="js_popup_contactform__form main-salebanner formStep1">
         <input type="hidden" name="style" value="style5">
         <div class="widgetTitle">
-            <?php echo $config['style5_title1'];?>
+            {{$config['style5_title1']}}
         </div>
         <div class="widgetTitleBig">
-            <?php echo $config['style5_title2'];?>
+            {{$config['style5_title2']}}
         </div>
         <div class="widgetDescription">
-            <?php echo $config['style5_content'];?>
+            {{$config['style5_content']}}
         </div>
         <div class="form-email">
             <?php if(in_array('email', $contactform_input)) {?>
-                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" <?php echo (in_array('email', $contactform_required)) ? 'required' : '';?>>
+                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" {{(in_array('email', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('phone', $contactform_input)) {?>
-                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" <?php echo (in_array('phone', $contactform_required)) ? 'required' : '';?>>
+                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" {{(in_array('phone', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('note', $contactform_input)) {?>
-                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" <?php echo (in_array('note', $contactform_required)) ? 'required' : '';?>></textarea>
+                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" {{(in_array('note', $contactform_required)) ? 'required' : ''}}></textarea>
             <?php } ?>
-            <button type="submit" class="button-send font-button-send widgetButton widgetBuble"><i class="fas fa-gift" id="bubble-icon"></i></button>
+            <button type="submit" class="button-send font-button-send widgetButton widgetBuble">{!! !empty($config['style5_btn_txt']) ? $config['style5_btn_txt'] : '<i class="fas fa-gift" id="bubble-icon"></i>' !!}</button>
         </div>
     </form>
+    <div class="js_popup_contactform__success formStep2 hiddenAll">
+        <div class="success-check animated bounce">
+            <img class="images-check" src="https://themes.trazk.com/004/contactform/master/images/other-icon/success-check.png" alt="">
+        </div>
+        <p class="thanks">Cảm ơn bạn đã để lại thông tin</p>
+    </div>
 </div>
 <style>
     .popup-alert .modal-dialog {
@@ -37,7 +43,7 @@
     .contactform-style-5 .banner-image{
         position: absolute;
         top: -15px;
-        z-index: 999;
+        z-index: 1;
         left: 0;
         width: 490px;
         height: 280px;
@@ -57,19 +63,19 @@
     .contactform-style-5 .widgetTitle {
         font-size: 20px;
         font-weight: 700;
-        color: <?php echo $config['style5_title1_color'];?>;
+        color: {{$config['style5_title1_color']}};
     }
     .contactform-style-5 .widgetTitleBig {
         font-size: 74px; line-height: 80px;
         font-weight: 700;
-        color: <?php echo $config['style5_title2_color'];?>;
+        color: {{$config['style5_title2_color']}};
     }
     .contactform-style-5 .widgetDescription {
         font-size: 14px;
         padding: 5px 35px;
         font-weight: 500;
         text-align: center;
-        color:<?php echo $config['style5_content_color'];?>;
+        color:{{$config['style5_content_color']}};
     }
     .contactform-style-5 .form-email {
         width: 260px;
@@ -100,15 +106,18 @@
         margin-bottom: 50px;
         border: none;
         cursor: pointer;
-        color: <?php echo $config['style5_btn_color'];?>;
-        background-color: <?php echo $config['style5_btn_bg'];?>;
+        color: {{$config['style5_btn_color']}};
+        background-color: {{$config['style5_btn_bg']}};
     }
     .contactform-style-5 .js_popup_contactform__success {
-        width: 60%;
         margin: 1.5rem;
         justify-content: center;
         text-align: center;
         display: none;
+        background: #fff;
+        width: 100%;
+        padding-top: 140px;
+        border-radius: 10px;
     }
     .contactform-style-5 .js_popup_contactform__success .thanks { color: #333; padding: 20px 0 40px 0; }
     .contactform-style-5 .js_popup_contactform__success .images-check {

@@ -6,7 +6,10 @@ foreach (glob(Path::plugin(POPUP_NAME).'/modules/salebanner/*', GLOB_ONLYDIR) as
 }
 
 function admin_page_popup_salebanner() {
-    include 'html-salebanner.php';
+    $styles = popup_salebanner::style();
+    $active = Option::get('popup_salebanner_active');
+    Plugin::view(POPUP_NAME, 'modules/salebanner/html-salebanner', ['styles' => $styles, 'active' => $active]);
+
 }
 
 class popup_salebanner {

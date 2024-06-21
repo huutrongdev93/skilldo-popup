@@ -1,7 +1,3 @@
-<?php
-$styles = popup_salebanner::style();
-$active = Option::get('popup_salebanner_active');
-?>
 <div class="popup_salebanner-box">
     <div class="row">
         <div class="col-md-8">
@@ -9,12 +5,12 @@ $active = Option::get('popup_salebanner_active');
                 <label for="">Chọn mẫu</label>
                 <hr style="margin: 5px 0;">
                 <div class="clearfix"> </div>
-                <?php foreach ($styles as $item_key => $item): ?>
-                    <label class="popup_salebanner__select <?php echo ($active == $item_key) ? 'active' : '';?>" data-tab="#tab-<?php echo $item_key;?>">
-                        <?php $item_key::admin_demo();?>
-                        <input type="radio" value="<?php echo $item_key;?>" name="popup_style" <?php echo ($active == $item_key) ? 'checked' : '';?>>
+                @foreach ($styles as $item_key => $item)
+                    <label class="popup_salebanner__select {{($active == $item_key) ? 'active' : ''}}" data-tab="#tab-{{$item_key}}">
+                        @php $item_key::admin_demo(); @endphp
+                        <input type="radio" value="{{$item_key}}" name="popup_style" {{($active == $item_key) ? 'checked' : ''}}>
                     </label>
-                <?php endforeach ?>
+                @endforeach
             </div>
         </div>
         <div class="col-md-4">
@@ -22,11 +18,11 @@ $active = Option::get('popup_salebanner_active');
                 <label for="">Cấu hình</label>
                 <hr style="margin: 5px 0;">
                 <div class="clearfix"> </div>
-                <?php foreach ($styles as $item_key => $item): ?>
-                    <div class="tabs-option <?php echo ($active == $item_key) ? 'active' : '';?>" id="tab-<?php echo $item_key;?>">
-                        <div class="row"><?php $item_key::admin_config();?></div>
+                @foreach ($styles as $item_key => $item)
+                    <div class="tabs-option {{($active == $item_key) ? 'active' : ''}}" id="tab-{{$item_key}}">
+                        <div class="row">@php $item_key::admin_config(); @endphp</div>
                     </div>
-                <?php endforeach ?>
+                @endforeach
             </div>
         </div>
     </div>

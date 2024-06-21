@@ -5,16 +5,16 @@ Plugin class    : popup
 Plugin uri      : https://sikido.vn
 Description     : Pop-up được xem là hình thức quảng cáo phổ biến với chi phí thấp đem lại nhiều hiệu quả. Bên cạnh đó, có thể xem pop-up như một call-to-action (nút kêu gọi hành động) mạnh mẽ.
 Author          : SKDSoftware Dev Team
-Version         : 1.3.0
+Version         : 1.4.0
 */
 const POPUP_NAME = 'popup';
 
 class popup {
 
-    private $name = 'popup';
+    private string $name = 'popup';
 
     function __construct() {
-        add_action('init', array($this, 'load_assets'));
+        add_action('theme_custom_assets', array($this, 'assets'), 10, 2);
         add_action('admin_init', array($this, 'add_admin_menu'));
         add_action('cle_footer', array($this, 'render'));
         add_action('cle_header', array($this, 'localize_script'), 50);
@@ -27,18 +27,22 @@ class popup {
     //Gở bỏ plugin
     public function uninstall() {}
     
-    public function add_admin_menu() {
+    public function add_admin_menu(): void
+    {
         $count = (int)Option::get('popup_contactform_new', 0);
         AdminMenu::addSub('marketing','popup_contactform','Khách đăng ký popup', 'post?post_type=popup_contactform', ['count' => $count]);
     }
 
-    public function load_assets() {
-        Template::asset()->location('header')->add('popup', Path::plugin( POPUP_NAME ).'/assets/css/popup-style.css', ['minify' => true]);
-        Template::asset()->location('footer')->add('footer', Path::plugin( POPUP_NAME ).'/assets/js/popup-script.js', ['minify' => true]);
+    public function assets(AssetPosition $header, AssetPosition $footer): void
+    {
+        $header->add('popup', Path::plugin( POPUP_NAME ).'/assets/css/popup-style.css', ['minify' => true]);
+        $footer->add('footer', Path::plugin( POPUP_NAME ).'/assets/js/popup-script.js', ['minify' => true]);
     }
 
-    public function localize_script() {
+    public function localize_script(): void
+    {
         $config = static::config();
+        if(!is_array( $config['show']))  $config['show'] = (array) $config;
         if(!empty($config['active'])) {
             $page = Template::getPage();
             if(in_array('all', $config['show']) || in_array($page, $config['show'])) {
@@ -60,19 +64,27 @@ class popup {
         }
     }
 
-    public function render() {
+    public function render(): void
+    {
         $config = static::config();
-        if(!empty($config['active']) && method_exists('popup_'.$config['active'], 'render')) {
+        if(!empty($config['active'])&& method_exists('popup_'.$config['active'], 'render')) {
+
             $page = Template::getPage();
+
+            if(!is_array($config['show'])) $config['show'] = (array) $config['show'];
+
             if(in_array('all', $config['show']) || in_array($page, $config['show'])) {
+                
                 $active = 'popup_'.$config['active'];
-                include_once 'modules/html-popup.php';
+
+                Plugin::view(POPUP_NAME, 'modules/html-popup', ['active' => $active]);
             }
         }
     }
 
-    static public function tool() {
-        $popup_style = [
+    static function tool(): array
+    {
+        return [
             'general' => [
                 'label' => 'Cấu hình',
                 'callback' => 'PopupAdmin::general'
@@ -90,10 +102,9 @@ class popup {
                 'callback' => 'admin_page_popup_salebanner'
             ]
         ];
-        return $popup_style;
     }
 
-    static public function config($key = '') {
+    static function config($key = '') {
         $default = [
             'active' => 'default',
             'show'  => ['home'],
@@ -112,7 +123,8 @@ class popup {
         return $config;
     }
 
-    static public function renderConfig() {
+    static function renderConfig(): void
+    {
         $config = static::config();
         if(!empty($config['active']) && method_exists('popup_'.$config['active'], 'render')) {
             ?>
@@ -134,6 +146,7 @@ new popup();
 include 'modules/default/default.php';
 include 'modules/salebanner/salebanner.php';
 include 'modules/contactform/contactform.php';
+
 
 if(Admin::is()) {
     include 'admin/popup-admin.php';

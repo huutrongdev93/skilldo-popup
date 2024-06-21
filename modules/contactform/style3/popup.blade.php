@@ -1,6 +1,6 @@
-<div class="contactform-style-3 widgetBackgroundImage">
+<div class="js_popup_contactform contactform-style-3 widgetBackgroundImage">
     <div class="cick-to-call-header-img widgetBackground ">
-        <?php echo Template::img($config['style3_popup_bg']);?>
+        {!!Template::img($config['style3_popup_bg'])!!}
     </div>
     <div class="js_popup_contactform__success formStep2 hiddenAll">
         <div class="success-check animated bounce">
@@ -11,22 +11,22 @@
     <form class="js_popup_contactform__form main-salebanner formStep1">
         <input type="hidden" name="style" value="style3">
         <div class="widgetTitle">
-            <?php echo $config['style3_title1'];?>
+            {{$config['style3_title1']}}
         </div>
         <div class="widgetDescription">
-            <?php echo $config['style3_content'];?>
+            {{$config['style3_content']}}
         </div>
         <div class="form-email">
             <?php if(in_array('email', $contactform_input)) {?>
-                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" <?php echo (in_array('email', $contactform_required)) ? 'required' : '';?>>
+                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" {{(in_array('email', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('phone', $contactform_input)) {?>
-                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" <?php echo (in_array('phone', $contactform_required)) ? 'required' : '';?>>
+                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" {{(in_array('phone', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('note', $contactform_input)) {?>
-                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" <?php echo (in_array('note', $contactform_required)) ? 'required' : '';?>></textarea>
+                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" {{(in_array('note', $contactform_required)) ? 'required' : ''}}></textarea>
             <?php } ?>
-            <button type="submit" class="button-send font-button-send widgetButton widgetBuble"><i class="fas fa-gift" id="bubble-icon"></i></button>
+            <button type="submit" class="button-send font-button-send widgetButton widgetBuble">{!! !empty($config['style3_btn_txt']) ? $config['style3_btn_txt'] : '<i class="fas fa-gift" id="bubble-icon"></i>' !!}</button>
         </div>
     </form>
 </div>
@@ -53,13 +53,13 @@
         align-items: center;
     }
     .contactform-style-3 .main-salebanner {
-        background-color: <?php echo $config['style3_popup_color'];?>;
+        background-color: {{$config['style3_popup_color']}};
         overflow: hidden;padding:20px 10px 10px 10px;
     }
     .contactform-style-3 .widgetTitle {
         margin-bottom: 8px;
         line-height: 24px;
-        color: <?php echo $config['style3_title1_color'];?>;
+        color: {{$config['style3_title1_color']}};
         font-weight: 700;
         text-align: center;
         overflow: hidden;
@@ -75,7 +75,7 @@
         margin: 20px 0;
         margin-top: 0;
         width: 100%;
-        color:<?php echo $config['style3_content_color'];?>;
+        color:{{$config['style3_content_color']}};
     }
     .contactform-style-3 .form-email {
         display: flex;
@@ -104,8 +104,8 @@
         padding: 0 15px;
         border: none;
         cursor: pointer;
-        color: <?php echo $config['style3_btn_color'];?>;
-        background-color: <?php echo $config['style3_btn_bg'];?>;
+        color: {{$config['style3_btn_color']}};
+        background-color: {{$config['style3_btn_bg']}};
     }
     .contactform-style-3 .js_popup_contactform__success {
         width: 60%;
@@ -114,7 +114,7 @@
         text-align: center;
         display: none;
     }
-    .contactform-style-3 .js_popup_contactform__success .thanks { color: #333; padding: 20px 0 40px 0; }
+    .contactform-style-3 .js_popup_contactform__success .thanks { color: #333; padding: 20px 0 40px 0; margin: 0 auto;}
     .contactform-style-3 .js_popup_contactform__success .images-check {
         height: 110px;
         padding-top: 40px;

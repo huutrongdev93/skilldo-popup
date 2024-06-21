@@ -1,10 +1,10 @@
 <div class="salebanner-component-7 widgetBg">
     <div class="main-salebanner widgetBackgroundImage">
         <div class="group">
-            <div class="widgetTitle"><div><?php echo $config['style7_title1'];?></div></div>
-            <div class="widgetBigTitle"><?php echo $config['style7_title2'];?></div>
-            <div class="widgetDescription"><?php echo $config['style7_content'];?></div>
-            <a class="btn widgetButton" href="<?php echo $config['style7_btn_url'];?>" target="_top"><?php echo $config['style7_btn_txt'];?></a>
+            <div class="widgetTitle"><div>{{$config['style7_title1']}}</div></div>
+            <div class="widgetBigTitle">{{$config['style7_title2']}}</div>
+            <div class="widgetDescription">{{$config['style7_content']}}</div>
+            <a class="btn widgetButton" href="{{$config['style7_btn_url']}}" target="_top">{{$config['style7_btn_txt']}}</a>
         </div>
     </div>
     <a target="_blank" href="https://fff.com.vn" class="widgetPowerBy widgetPowerByDark"></a>
@@ -17,7 +17,7 @@
     .salebanner-component-7 {
         width: 900px;
         height: 472px;
-        background-image: url('<?php echo Template::imgLink($config['style7_popup_bg']);?>');
+        background-image: url('{{Template::imgLink($config['style7_popup_bg'])}}');
         border-radius: 10px;
         display: inline-flex;
         text-align: center;
@@ -43,17 +43,17 @@
     }
     .salebanner-component-7 .widgetTitle {
         font-size: 20px; line-height: 25px;
-        color: <?php echo $config['style7_title1_color'];?>!important;
+        color: {{$config['style7_title1_color']}}!important;
     }
 
     .salebanner-component-7 .widgetBigTitle {
         font-size: 99px; line-height: 99px;
-        color: <?php echo $config['style7_title2_color'];?>!important;
+        color: {{$config['style7_title2_color']}}!important;
     }
     .salebanner-component-7 .widgetDescription {
         font-size: 17px;
         margin: 20px 0;
-        color: <?php echo $config['style7_content_color'];?>!important;
+        color: {{$config['style7_content_color']}}!important;
 
     }
     .salebanner-component-7  .widgetButton {
@@ -68,8 +68,8 @@
         font-size: 18px;
         font-weight: 400;
         text-decoration: none;
-        color: <?php echo $config['style7_btn_color'];?>!important;
-        background-color: <?php echo $config['style7_btn_bg'];?>!important;
+        color: {{$config['style7_btn_color']}}!important;
+        background-color: {{$config['style7_btn_bg']}}!important;
     }
     @media (max-width: 600px) {
         .popup-alert .modal-dialog {

@@ -1,23 +1,23 @@
-<div class="contactform-style-4 widgetBackgroundImage">
+<div class="js_popup_contactform contactform-style-4 widgetBackgroundImage">
     <form class="js_popup_contactform__form main-salebanner formStep1">
         <input type="hidden" name="style" value="style4">
         <div class="widgetTitle">
-            <?php echo $config['style4_title1'];?>
+            {{$config['style4_title1']}}
         </div>
         <div class="widgetDescription">
-            <?php echo $config['style4_content'];?>
+            {{$config['style4_content']}}
         </div>
         <div class="form-email">
             <?php if(in_array('email', $contactform_input)) {?>
-                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" <?php echo (in_array('email', $contactform_required)) ? 'required' : '';?>>
+                <input type="email" name="email" class="banner-input-object banner-email displayBlock" placeholder="Email của bạn" {{(in_array('email', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('phone', $contactform_input)) {?>
-                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" <?php echo (in_array('phone', $contactform_required)) ? 'required' : '';?>>
+                <input type="text" name="phone" class="banner-input-object banner-phone displayBlock" placeholder="Số điện thoại" {{(in_array('phone', $contactform_required)) ? 'required' : ''}}>
             <?php } ?>
             <?php if(in_array('note', $contactform_input)) {?>
-                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" <?php echo (in_array('note', $contactform_required)) ? 'required' : '';?>></textarea>
+                <textarea name="note" class="banner-input-object banner-note displayBlock" rows="3" {{(in_array('note', $contactform_required)) ? 'required' : ''}}></textarea>
             <?php } ?>
-            <button type="submit" class="button-send font-button-send widgetButton widgetBuble"><i class="fas fa-gift" id="bubble-icon"></i></button>
+            <button type="submit" class="button-send font-button-send widgetButton widgetBuble">{!! !empty($config['style4_btn_txt']) ? $config['style4_btn_txt'] : '<i class="fas fa-gift" id="bubble-icon"></i>' !!}</button>
         </div>
     </form>
     <div class="img-background widgetBackgroundImage"></div>
@@ -41,7 +41,7 @@
         position: relative;
         display: flex;
         background-size: cover;
-        background-image: url('<?php echo Template::imgLink($config['style4_popup_bg']);?>');
+        background-image: url('{!!Template::imgLink($config['style4_popup_bg'])!!}');
         background-color: #ffffff;
         font-family: 'Quicksand', sans-serif;
     }
@@ -76,8 +76,8 @@
         padding: 0 15px;
         border: none;
         cursor: pointer;
-        color: <?php echo $config['style4_btn_color'];?>;
-        background-color: <?php echo $config['style4_btn_bg'];?>;
+        color: {{$config['style4_btn_color']}};
+        background-color: {{$config['style4_btn_bg']}};
     }
     .contactform-style-4 .widgetTitle {
         font-size: 35px; line-height: 55px; font-weight: bold;
@@ -87,7 +87,7 @@
         -webkit-line-clamp: 2;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        color: <?php echo $config['style4_title1_color'];?>;
+        color: {{$config['style4_title1_color']}};
     }
     .contactform-style-4 .widgetDescription {
         font-size: 15px;
@@ -101,7 +101,7 @@
         text-overflow: ellipsis;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        color:<?php echo $config['style4_content_color'];?>;
+        color:{{$config['style4_content_color']}};
     }
 
     .contactform-style-4 .img-background {
@@ -111,7 +111,7 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
-        background-image: url('<?php echo Template::imgLink($config['style4_popup_sp']);?>');
+        background-image: url('{!!Template::imgLink($config['style4_popup_sp'])!!}');
     }
 
     .contactform-style-4 .js_popup_contactform__success {
