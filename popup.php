@@ -1,12 +1,4 @@
 <?php
-/**
-Plugin name     : Marketing - Pop-up
-Plugin class    : popup
-Plugin uri      : https://sikido.vn
-Description     : Pop-up được xem là hình thức quảng cáo phổ biến với chi phí thấp đem lại nhiều hiệu quả. Bên cạnh đó, có thể xem pop-up như một call-to-action (nút kêu gọi hành động) mạnh mẽ.
-Author          : SKDSoftware Dev Team
-Version         : 1.4.0
-*/
 const POPUP_NAME = 'popup';
 
 class popup {
