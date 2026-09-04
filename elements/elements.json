@@ -1,0 +1,22 @@
+{
+    "popup": {
+        "PopupHeadingElement": {
+            "path": "elements/popup-heading/popup-heading.widget.php"
+        },
+        "PopupTextElement": {
+            "path": "elements/popup-text/popup-text.widget.php"
+        },
+        "PopupImageElement": {
+            "path": "elements/popup-image/popup-image.widget.php"
+        },
+        "PopupButtonElement": {
+            "path": "elements/popup-button/popup-button.widget.php"
+        },
+        "PopupFormElement": {
+            "path": "elements/popup-form/popup-form.widget.php"
+        },
+        "PopupCloseElement": {
+            "path": "elements/popup-close/popup-close.widget.php"
+        }
+    }
+}

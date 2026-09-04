@@ -1,0 +1,17 @@
+{
+    "name":"Marketing - Pop-up",
+    "class":"Popup",
+    "url":"https://sikido.vn",
+    "description":"Pop-up quảng cáo, khuyến mãi và thu thập thông tin. Chọn 1 trong 13 mẫu có sẵn hoặc tự thiết kế nội dung bằng trình kéo thả (Page Builder).",
+    "author":"SKDSoftware Dev Team",
+    "version":"2.1.0",
+    "thumb": "assets/images/thumb.png",
+    "autoload": {
+        "alias": "Popup",
+        "psr-4": {
+            "Popup\\Enum" : "app\\Enum",
+            "Popup\\Presets" : "app\\Presets",
+            "Popup\\Styles" : "app\\Styles"
+        }
+    }
+}

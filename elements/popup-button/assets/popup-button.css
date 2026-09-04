@@ -1,0 +1,16 @@
+.popup-button-wrap {
+    width: 100%;
+}
+
+.popup-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    border: 0;
+}
+
+.popup-button:hover {
+    text-decoration: none;
+}
