@@ -158,9 +158,17 @@ Phía JS quyền được mở bằng `window.BUILDER_PERMISSIONS_CONFIG` in nga
    **Không mượn element của theme trong preset** (xem mục trên); cần loại nội dung mới thì viết element
    trong `plugins/popup/elements/` rồi khai vào `elements.json`.
 13. `minifyCss` rút gọn màu khi build (`#00ff00` → `lime`), nên đừng so CSS bằng chuỗi hex thô.
-14. **Căn popup bằng flex trên chính `.modal`, không bằng `margin` của `.modal-dialog`.** Bootstrap mở
-   modal bằng inline `style="display:block"` nên phải `#popup_x.modal.show{display:flex!important}`
-   (id + `.show` mới thắng inline style). Ghi đè `margin:auto` như bản đầu làm popup dán vào mép trên
-   và popup cao hơn màn hình thì bị cắt mất phần dưới. Khoảng cách tới mép do `settings.edgeSpacing`
-   (mặc định 30px, tự nâng lên 50px khi nút đóng đặt NGOÀI khung), `modal-body` có
-   `max-height: calc(100vh - edge*2 - 20px)` + `overflow-y:auto` để nội dung dài cuộn được.
+14. **Căn popup bằng flex trên `.modal-dialog`, KHÔNG gắn layout vào `.show`.** Hai lần vấp ở đây:
+   - ghi đè `margin: auto` lên `.modal-dialog` → mất khoảng cách mặc định của Bootstrap, popup dán
+     vào mép trên và popup cao hơn màn hình thì bị cắt phần dưới;
+   - chuyển sang `#popup_x.modal.show{display:flex!important}` → lúc ĐÓNG, Bootstrap gỡ `.show`
+     trước rồi mới chạy fade 300ms, quy tắc biến mất ngay từ đầu hiệu ứng nên popup nhảy về
+     góc trên bên trái rồi mới mờ đi.
+   Bản đúng: `#popup_x .modal-dialog { display:flex; align-items:…; min-height: calc(100% - edge*2);
+   margin: edge auto; }` (đúng cách `.modal-dialog-centered` của Bootstrap) + `.modal-content{width:100%}`.
+   Khoảng cách tới mép là `settings.edgeSpacing` (mặc định 30px, tự nâng 50px khi nút đóng đặt NGOÀI
+   khung); `modal-body` có `max-height: calc(100vh - edge*2 - 20px)` + `overflow-y:auto` cho nội dung dài.
+15. **Hiệu ứng mở/đóng phải tự khai.** Bootstrap luôn trượt `.modal-dialog` lên 50px khi fade, nên
+   chọn "Mờ dần" mà popup vẫn nhích chỗ lúc đóng. Blade khai `transform` theo `settings.animation`:
+   `fade` → `none`, `zoom` → `scale(.92)`, `slide` → `translate(0,-50px)`; `.show` luôn `transform:none`;
+   có nhánh `prefers-reduced-motion` tắt hiệu ứng.
