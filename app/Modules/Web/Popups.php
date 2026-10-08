@@ -47,6 +47,9 @@ class Popups
 
     static function render(): void
     {
+        // Khung xem trước của Page Builder (review/*): pop-up che vùng đang sửa
+        if (str_starts_with(trim((string) request()->path(), '/'), 'review/')) return;
+
         foreach (static::matched() as $object)
         {
             $popup = PopupStyle::getInstance()->get($object->template);

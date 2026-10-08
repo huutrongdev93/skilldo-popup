@@ -91,7 +91,7 @@ class PopupStyle12 extends PopupStyleBase
             'btn_bg' => '#EF4B4B',
             'form' => [
                 [
-                    'label'     => 'Email nhân khuyến mãi',
+                    'label'     => 'Email nhận khuyến mãi',
                     'type'      => 'email',
                     'required'  => '1',
                 ]

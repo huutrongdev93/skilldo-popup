@@ -31,12 +31,12 @@
     z-index: 999999999;
 }
 
-.modal-body
+.popup-alert .modal-body
 {
     padding: 0;
 }
 
-.modal-open .modal
+.modal-open .modal.popup-alert
 {
     display: block;
 }

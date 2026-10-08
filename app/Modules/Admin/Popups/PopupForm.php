@@ -17,6 +17,16 @@ class PopupForm
     {
         $form->setModel(Popup::class);
 
+        //Vị trí hiển thị nằm trong settings['show'] (không phải cột riêng) nên phải nạp tay khi sửa
+        $showSaved = ['all'];
+
+        $object = \SkillDo\Cms\Support\Cms::getData('object');
+
+        if(!empty($object) && !empty($object->settings['show']) && is_array($object->settings['show']))
+        {
+            $showSaved = $object->settings['show'];
+        }
+
         $language = Language::list();
 
         $languageOptions = array_map(function ($lang) {
@@ -32,7 +42,7 @@ class PopupForm
 
         $form->right()
             ->addGroup('setting', 'Cấu hình chung')
-            ->radio('status', PopupStatus::options()->pluck('label', 'value')->toArray(), ['label' => 'Hiển thị'])
+            ->radio('status', PopupStatus::options()->pluck('label', 'value')->toArray(), ['label' => 'Hiển thị', 'value' => PopupStatus::RUN->value])
             ->radio('locale', $languageOptions, [
                 'label' => 'Ngôn ngữ hiển thị',
                 'value' => Language::default()
@@ -46,7 +56,7 @@ class PopupForm
                     'page_detail' => 'Trang nội dung',
                     'products_index' => 'Trang danh sách sản phẩm',
                     'products_detail' => 'Trang chi tiết sản phẩm',
-                ], ['label' => 'Vị trí hiển thị', 'value' => ['all']])
+                ], ['label' => 'Vị trí hiển thị', 'value' => $showSaved])
             ->select('loop',
                 [
                     'only' => 'Chỉ hiển thị một lần',

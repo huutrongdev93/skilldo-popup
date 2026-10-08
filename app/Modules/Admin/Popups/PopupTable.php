@@ -38,12 +38,12 @@ class PopupTable extends \SkillDo\Cms\Table\SKDObjectTable
                 })
             ],
             'time_delay'     => [
-                'label' => 'Thời delay',
+                'label' => 'Thời gian delay',
                 'column' => fn ($item, $args) => ColumnText::make('time_delay', $item, $args)->value(fn($item) => $item->time_delay . ' giây')
             ],
             'time_loop'     => [
                 'label' => 'Thời gian lặp lại',
-                'column' => fn ($item, $args) => ColumnText::make('time_loop', $item, $args)->value(fn($item) => $item->time_delay . ' phút')
+                'column' => fn ($item, $args) => ColumnText::make('time_loop', $item, $args)->value(fn($item) => $item->time_loop . ' phút')
             ],
             'loop'     => [
                 'label' => 'Lặp lại',
@@ -105,7 +105,7 @@ class PopupTable extends \SkillDo\Cms\Table\SKDObjectTable
             'id' => $item->popup_id,
             'module' => $this->module,
             'model' => $this->model,
-            'description' => trans('admin::message.page.confirmDelete')
+            'description' => 'Bạn chắc chắn muốn xóa popup <b>'.e($item->name).'</b> ?'
         ]);
         /**
          * @since 7.0.0
