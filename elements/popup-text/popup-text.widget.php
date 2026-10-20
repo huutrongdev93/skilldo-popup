@@ -43,6 +43,13 @@ class PopupTextElement extends Element
         parent::form();
     }
 
+    public function parts(): array
+    {
+        return [
+            'text' => ['selector' => '.popup-text', 'label' => 'Nội dung', 'field' => 'textStyle', 'content' => 'content', 'edit' => 'html'],
+        ];
+    }
+
     public function widget(): void
     {
         if(empty(trim(strip_tags((string)($this->options->content ?? ''), '<img><br><hr>'))))

@@ -59,6 +59,13 @@ class PopupHeadingElement extends Element
         parent::form();
     }
 
+    public function parts(): array
+    {
+        return [
+            'heading' => ['selector' => '.popup-heading', 'label' => 'Tiêu đề', 'field' => 'headingStyle', 'content' => 'heading', 'edit' => 'text'],
+        ];
+    }
+
     public function widget(): void
     {
         if(empty($this->options->heading))

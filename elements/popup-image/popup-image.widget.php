@@ -61,6 +61,13 @@ class PopupImageElement extends Element
         parent::form();
     }
 
+    public function parts(): array
+    {
+        return [
+            'image' => ['selector' => '.popup-image img', 'label' => 'Ảnh', 'field' => 'imgBox', 'content' => 'img'],
+        ];
+    }
+
     public function widget(): void
     {
         if(empty($this->options->img))

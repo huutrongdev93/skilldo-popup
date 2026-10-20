@@ -53,6 +53,13 @@ class PopupButtonElement extends Element
         parent::form();
     }
 
+    public function parts(): array
+    {
+        return [
+            'button' => ['selector' => '.popup-button', 'label' => 'Nút', 'field' => 'style', 'content' => 'text'],
+        ];
+    }
+
     public function widget(): void
     {
         Theme::view($this->getDir().'views/view', [

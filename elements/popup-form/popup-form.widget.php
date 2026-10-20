@@ -127,6 +127,15 @@ class PopupFormElement extends Element
         parent::form();
     }
 
+    public function parts(): array
+    {
+        return [
+            'label' => ['selector' => '.form-group label', 'label' => 'Nhãn', 'field' => 'labelStyle'],
+            'input' => ['selector' => '.form-control', 'label' => 'Ô nhập', 'field' => 'fieldBorder', 'content' => 'fields'],
+            'button' => ['selector' => 'button[type="submit"]', 'label' => 'Nút gửi', 'field' => 'buttonStyle', 'content' => 'buttonText'],
+        ];
+    }
+
     public function widget(): void
     {
         $fields = (array)($this->options->fields ?? []);

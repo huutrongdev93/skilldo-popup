@@ -54,6 +54,13 @@ class PopupCloseElement extends Element
         parent::form();
     }
 
+    public function parts(): array
+    {
+        return [
+            'button' => ['selector' => '.js-popup-close', 'label' => 'Nút', 'field' => 'style', 'content' => 'text'],
+        ];
+    }
+
     public function widget(): void
     {
         Theme::view($this->getDir().'views/view', [
