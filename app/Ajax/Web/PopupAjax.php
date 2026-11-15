@@ -10,6 +10,24 @@ use SkillDo\Validate\Validate;
 
 class PopupAjax
 {
+    /**
+     * Giới hạn 10 lượt gửi / 10 phút cho mỗi IP + popup: endpoint công khai, không có thì
+     * có thể bơm đầy bảng popup_submission. Vượt ngưỡng thì trả lỗi (response()->error dừng request).
+     */
+    private static function throttle(Request $request, int $popupId): void
+    {
+        $key = 'popup_submit_'.md5($request->ip().'|'.$popupId);
+
+        $count = (int) Cache::get($key, 0);
+
+        if($count >= 10)
+        {
+            response()->error('Bạn gửi quá nhanh, vui lòng thử lại sau.');
+        }
+
+        Cache::save($key, $count + 1, 10);
+    }
+
     static function submit(Request $request): void
     {
         if($request->has('antibot') && $request->input('antibot') != '')
@@ -26,7 +44,7 @@ class PopupAjax
             response()->error($validate->errors());
         }
 
-        $id = $request->input('popup_id');
+        $id = (int) $request->input('popup_id');
 
         $popup = \Popup\Models\Popup::find($id);
 
@@ -34,6 +52,8 @@ class PopupAjax
         {
             response()->error( 'Popup không tồn tại.');
         }
+
+        self::throttle($request, $id);
 
         if(empty($popup->settings['form']))
         {
@@ -78,9 +98,14 @@ class PopupAjax
 
         foreach($popup->settings['form'] as $key => $field)
         {
+            // Bỏ thẻ HTML và cắt độ dài: giá trị này được in lại ở trang quản trị / email.
+            $value = $request->input('field_'.$key);
+
+            if(is_array($value)) $value = implode(', ', $value);
+
             $data['data']['field_'.$key] = [
                 'label' => $field['label'],
-                'value' => $request->input('field_'.$key),
+                'value' => mb_substr(strip_tags((string) $value), 0, 1000),
             ];
         }
 
@@ -124,6 +149,8 @@ class PopupAjax
         {
             response()->error('Popup không tồn tại.');
         }
+
+        self::throttle($request, $id);
 
         //Mẫu nào cũng có thể chứa form (mọi popup đều dựng bằng builder), chỉ cần đang bật
         if($popup->status !== PopupStatus::RUN->value)
@@ -186,7 +213,7 @@ class PopupAjax
 
             $data['data']['field_'.$field['name']] = [
                 'label' => $field['label'] ?: $field['name'],
-                'value' => strip_tags((string) $value),
+                'value' => mb_substr(strip_tags((string) $value), 0, 1000),
             ];
         }
 
