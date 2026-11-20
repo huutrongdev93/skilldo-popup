@@ -9,6 +9,12 @@ class PopupAjax
 {
     static function config(Request $request): void
     {
+        // Ajax::admin() chỉ chặn ở mức loggin_admin: kiểm quyền theo chức năng.
+        if(!\SkillDo\Support\Auth::hasCap('edit_setting'))
+        {
+            response()->error(trans('admin::app.categoryAccessForbidden'));
+        }
+
         $validate = $request->validate([
             'template' => Rule::make('Template popup')->notEmpty()->in(PopupStyle::getInstance()->keys()),
         ]);
@@ -51,6 +57,12 @@ class PopupAjax
      */
     static function applyPreset(Request $request): void
     {
+        // Ajax::admin() chỉ chặn ở mức loggin_admin: kiểm quyền theo chức năng.
+        if(!\SkillDo\Support\Auth::hasCap('edit_setting'))
+        {
+            response()->error(trans('admin::app.categoryAccessForbidden'));
+        }
+
         $validate = $request->validate([
             'id' => Rule::make('Popup')->notEmpty()->integer()->min(1),
         ]);

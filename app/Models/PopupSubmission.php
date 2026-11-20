@@ -22,7 +22,7 @@ class PopupSubmission extends Model
         {
             if(Str::isSerialized($popup->data))
             {
-                $popup->data = unserialize($popup->data);
+                $popup->data = unserialize($popup->data, ['allowed_classes' => [\stdClass::class]]);
             }
         });
     }
